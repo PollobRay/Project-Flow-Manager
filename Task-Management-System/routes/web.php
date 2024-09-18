@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,7 @@ Route::post('loginMatch',[UserController::class,'login'])->name('loginMatch');
 Route::get('logout',[UserController::class,'logout'])->name('logout');
 Route::get('profile',[UserController::class,'profile'])->name('profile');
 Route::post('updateUser',[UserController::class,'updateUser'])->name('updateUser');
+
+Route::get('category',[CategoryController::class,'index'])->name('category');
+Route::get('addCategory',[CategoryController::class,'create'])->name('addCategory');
+Route::post('storeCategory',[CategoryController::class,'store'])->name('storeCategory');

@@ -31,7 +31,7 @@ style="background-image: url({{asset('assets/images/bg1.png')}}); width: 100%; h
             <div class="card-body p-5" >
               <div class="d-flex flex-column justify-content-center align-items-center">
                 <h2 class="text-uppercase fw-bold text-center mb-2">Browse Project Categories</h2> 
-                <a class="btn btn-outline-success btn-lg fw-bold align-items-center text-uppercase mt-4" href="">Project Categories &#8594;</a>
+                <a class="btn btn-outline-success btn-lg fw-bold align-items-center text-uppercase mt-4" href="{{route('category')}}">Project Categories &#8594;</a>
             </div>
             </div>
           </div>
