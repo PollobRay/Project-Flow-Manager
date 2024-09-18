@@ -12,13 +12,14 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
           <div class="card" style="border-radius: 15px; background-color: rgba(233, 231, 231, 0.842);">
             <div class="card-body p-5" >
               <h2 class="text-uppercase text-center mb-2">User Login</h2>
-              <form>
+              <form action="{{route('loginMatch')}}" method="POST">
+                @csrf
                 <div data-mdb-input-init class="form-outline mb-2">
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
+                  <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example3cg">Email</label>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-2">
-                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+                  <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example4cg">Password</label>
                 </div>
                 <div class="form-check d-flex justify-content-center">
@@ -28,13 +29,25 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
                   </label>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <button  type="button" data-mdb-button-init
-                    data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
+                  <button  type="submit"  class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
                 </div>
                 <p class="text-center text-muted mt-1 mb-0">Not have an account? <a href="{{route('signup')}}"
                     class="fw-bold text-body"><u>Register here</u></a></p>
               </form>
             </div>
+            
+            @if ($errors->any())
+              <div class="card-footer text-body-secondary">
+                <div class="alert alert-danger">
+                  <ul>
+                    @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                </div>
+              </div>
+            @endif
+
           </div>
         </div>
       </div>

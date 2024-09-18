@@ -10,16 +10,21 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px; background-color: rgba(233, 231, 231, 0.842);">
+            <div class="mt-4 d-flex justify-content-around align-items-center">
+                <h3 class="text-uppercase text-danger">{{ Auth::user()->name }}</h3>
+                <a class="btn btn-outline-success text-uppercase" href="{{ route('logout') }}">Logout</a>
+            </div>
+            
             <div class="card-body p-5" >
-              <h2 class="text-uppercase text-center mb-2">User Registation</h2>
-              <form action="{{route('registerSave')}}" method="POST">
+              <h2 class="text-uppercase text-center mb-2">User Information</h2>
+              <form action="{{route('updateUser')}}" method="POST">
                 @csrf
                 <div data-mdb-input-init class="form-outline mb-2">
-                  <input type="text" name="name" id="form3Example1cg" class="form-control form-control-lg" />
+                  <input type="text" name="name" id="form3Example1cg" class="form-control form-control-lg" value="{{ Auth::user()->name }}"/>
                   <label class="form-label" for="form3Example1cg">Full Name</label>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-2">
-                  <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" />
+                  <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" value="{{ Auth::user()->email }}" disabled />
                   <label class="form-label" for="form3Example3cg">Email</label>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-2">
@@ -30,20 +35,14 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
                   <input type="password" name="password_confirmation" id="form3Example4cdg" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example4cdg">Repeat Password</label>
                 </div>
-                <div class="form-check d-flex justify-content-center">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                  <label class="form-check-label mb-4" for="form2Example3g">
-                    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                  </label>
-                </div>
+                
                 <div class="d-flex justify-content-center">
-                  <button  type="submit"  class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                  <button  type="submit"  class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Update</button>
                 </div>
-                <p class="text-center text-muted mt-1 mb-0">Have already an account? <a href="{{route('login')}}"
-                    class="fw-bold text-body"><u>Login here</u></a></p>
+
               </form>
             </div>
-
+            
             @if ($errors->any())
               <div class="card-footer text-body-secondary">
                 <div class="alert alert-danger">
@@ -55,7 +54,6 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
                 </div>
               </div>
             @endif
-
           </div>
         </div>
       </div>

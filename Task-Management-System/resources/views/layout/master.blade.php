@@ -30,15 +30,21 @@
           <!-- Left links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#" style="font-weight: bold; font-size: 24px; color: black; text-transform: uppercase;">Task Management System</a>
+              <a class="nav-link" href="{{route('home')}}" style="font-weight: bold; font-size: 24px; color: black; text-transform: uppercase;">Task Management System</a>
             </li>
           </ul>
           <!-- Left links -->
 
           <div class="d-flex align-items-center">
+            @if (Auth::check())
+            <a  class="h5" href="{{route('profile')}}">
+              {{Auth::user()->name}}
+            </a>    
+            @else
             <a  class="btn btn-outline-success" href="{{route('login')}}">
               Login
             </a>
+            @endif
           </div>
         </div>
         <!-- Collapsible wrapper -->
