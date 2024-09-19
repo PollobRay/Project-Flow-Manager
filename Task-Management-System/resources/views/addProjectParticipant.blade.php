@@ -28,7 +28,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                     @foreach ($users as $user)
                     <div class="d-flex flex-row justify-content-between mt-5 ">
                         <div class="d-flex">
-                            <div class="p-2"><img src="{{asset('assets/images/bg.png')}}" alt="User Photo" class="img-thumbnail" style="height: 10em; width:10em"></div>
+                            <div class="p-2"><img src="@if(Auth::user()->image){{asset(Auth::user()->image)}}@else{{asset('assets/images/bg.png')}} @endif" alt="User Photo" class="img-thumbnail" style="height: 10em; width:10em"></div>
                             <div class="">
                                 <div class="p-2 text-uppercase"><h4 class="fw-bold text-danger">User : </h4></div>
                                 <div class="p-2"><h3 class="fw-bold text-success">{{$user->name}}</h3></div>

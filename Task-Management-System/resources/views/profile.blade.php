@@ -18,9 +18,9 @@ style="background-image: url('{{asset('assets/images/bg.png')}}'); width: 100%; 
             <div class="card-body p-5" >
               <h2 class="text-uppercase text-center mb-2">User Information</h2>
               <div class="text-center mb-2">
-                <img src="{{asset('assets/images/bg.png')}}" alt="Photo" class="img-thumbnail" style="height: 10em; width:10em">
+                <img src="@if(Auth::user()->image){{asset(Auth::user()->image)}}@else{{asset('assets/images/bg.png')}} @endif" alt="Photo" class="img-thumbnail" style="height: 10em; width:10em">
               </div>
-              <form action="{{route('updateUser')}}" method="POST">
+              <form action="{{route('updateUser')}}" class="mx-auto" enctype="multipart/form-data" method="POST">
                 @csrf
                 <div data-mdb-input-init class="form-outline mb-2">
                   <input type="text" name="name" id="form3Example1cg" class="form-control form-control-lg" value="{{ Auth::user()->name }}"/>

@@ -14,7 +14,7 @@ style="background-image: url({{asset('assets/images/bg1.png')}}); width: 100%; h
             <div class="card-body p-5" >
               <div class="d-flex flex-column justify-content-center align-items-center">
                 <h2 class="text-uppercase fw-bold text-center mb-2">Browse Your Tasks</h2> 
-                <a class="btn btn-outline-success btn-lg fw-bold align-items-center text-uppercase mt-4" href="">Your Tasks &#8594;</a>
+                <a class="btn btn-outline-success btn-lg fw-bold align-items-center text-uppercase mt-4" href="{{route('myTasks')}}">Your Tasks &#8594;</a>
             </div>
             </div>
           </div>
