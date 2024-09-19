@@ -11,7 +11,7 @@ class Task extends Model
 
     protected $table='tasks';
 
-    protected $fillable = [
+    /*protected $fillable = [
         'name',
         'description',
         'project_id ',
@@ -19,10 +19,10 @@ class Task extends Model
         'status',
         'privacy',
         'due_date ',
-    ];
+    ];*/
     	 	 	 	
     //or
-    //protected $guarded = [];
+    protected $guarded = [];
 
-    public $timestamps = false ;
+    //public $timestamps = false ;
 }

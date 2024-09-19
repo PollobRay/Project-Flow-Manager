@@ -36,41 +36,55 @@ class TaskController extends Controller
         
         return view('projects', ['projects' => $projects, 'categoryName' => $categoryName]);
     }
-
-    
-    // show detail of category
-    public function show(int $id)
-    {
-    $project = null;
-
-    if (Auth::check()) 
-    {// If the user is authenticated
-        $project = Projects::where(function($query) use ($id) {
-            $query->where('id', $id)
-                  ->where('privacy', 'public');
-        })
-        ->orWhereIn('id', ProjectParticipant::where('user_id', Auth::id())->pluck('project_id')->toArray())
-        ->first();
-    } 
-    else 
-    { // If the user is not authenticated, only public projects are available
-        $project = Projects::where('id', $id)
-                ->where('privacy', 'public')
-                ->first();
-    }
-
-    if ($project == null) {
-        return redirect()->route('login');
-    }
-
-    $leader_id = $project->leader_id;
-    $leader = User::where('id', $leader_id)->first();
-
-    return view('viewProject', ['project' => $project, 'leader'=> $leader]);
-    }
-
     */
+    
+    // show detail of task
+    public function show(int $proj_id, int $id)
+    {
+        $task = Task::find($id);
+        $privacy = $task->privacy;
+        $assign_to = $task->user_id;
 
+        $user = User::find($assign_to);
+        $project = Projects::find($proj_id);
+
+        if(Auth::check() && (Auth::id() == $assign_to || Auth::id() == $project->leader_id))
+        {
+            if(Auth::id() == $assign_to && $task->status == 'pending')
+            {
+                //Update Status
+                Task::where('id',$id)->update([
+                    'status' => 'in progress',
+                ]);
+            }
+            return view('viewTask', ['task' => $task, 'user'=>$user, 'proj_id'=>$proj_id]);
+        }
+        else if($privacy == 'public')
+        {
+            return view('viewTask', ['task' => $task, 'user'=>$user, 'proj_id'=>$proj_id]);
+        }
+        else
+        {
+            return redirect()->route('viewProject',['id' => $proj_id])->with('status', 'The Task Only Visible to Leader and Assigned User');
+        } 
+    }
+
+    public function markAsComplete(int $proj_id, int $id)
+    {
+        $task = Task::find($id);
+        $assign_to = $task->user_id;
+
+        if(Auth::check() && Auth::id() == $assign_to)
+        {
+            //Update Status
+            Task::where('id',$id)->update([
+                'status' => 'completed',
+            ]);
+            return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $proj_id])->with('status', 'Marked Completed for the Task');
+        }
+        return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $proj_id])->with('status', 'Only Assigned User can Mark as Complete');
+    }
+ 
     // create task
     public function create(int $id)
     {
@@ -92,6 +106,7 @@ class TaskController extends Controller
             'description' => 'required',
             'privacy' => 'required|in:public,private',
             'due_date' => 'required',
+            'project_id' => 'required',
         ]);
 
         $project = Projects::find($id);  // Find the project by its ID
@@ -102,7 +117,7 @@ class TaskController extends Controller
             Task::create([
                 'name' => $request->name,
                 'description' => $request->description,
-                'project_id' => 4,  // Ensure the project ID is passed here
+                'project_id' => $request->project_id,  // Ensure the project ID is passed here
                 'user_id' => $request->user_id,
                 'status' => 'pending',
                 'privacy' => $request->privacy,
@@ -115,8 +130,6 @@ class TaskController extends Controller
         {
             return redirect()->route('addTask', ['id'=>$id])->with('status','Only Project Leader can Create Task');
         }
-
-        return redirect()->route('addTask', ['id'=>$id])->with('status','Hi');
     }
 
 

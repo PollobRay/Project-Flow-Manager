@@ -58,5 +58,7 @@ Route::get('addProjectUser/{id}',[ProjectController::class,'indexParticipant'])-
 Route::get('storeProjectParticipant/{proj_id}/{user_id}',[ProjectController::class,'storeParticipant'])->whereNumber('proj_id')->whereNumber('user_id')->name('storeProjectParticipant');
 
 Route::get('addTask/{id}',[TaskController::class,'create'])->whereNumber('id')->name('addTask');
-Route::post('addTask/{id}',[TaskController::class,'store'])->whereNumber('id')->name('storeTask');
+Route::post('storeTask/{id}',[TaskController::class,'store'])->whereNumber('id')->name('storeTask');
+Route::get('viewTask/{proj_id}/{id}',[TaskController::class,'show'])->whereNumber('proj_id')->whereNumber('id')->name('viewTask');
+Route::get('markAsComplete/{proj_id}/{id}',[TaskController::class,'markAsComplete'])->whereNumber('proj_id')->whereNumber('id')->name('markAsComplete');
 

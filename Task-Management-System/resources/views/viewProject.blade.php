@@ -38,7 +38,7 @@
             <a href="{{ route('addProjectUser', ['id' => $project_id]) }}" type="button" class="btn btn-outline-primary text-uppercase mb-2">Add User</a>
             <a type="button" class="btn btn-outline-success text-uppercase mb-2">Update</a>
             <a type="button" class="btn btn-outline-danger text-uppercase">Delete</a>
-            <h2 class="text-uppercase fw-bold text-primary mt-2">Completed: <span class="text-danger">90%</span></h2>
+            <h2 class="text-uppercase fw-bold text-primary mt-2">Completed: <span class="text-danger">{{$percentage}}%</span></h2>
         </div>
         
     </div> 
@@ -49,17 +49,18 @@
     </div>
 
     <div class="row">
-
-        <a class="col-md-12 block-20 zoom-effect" href="#" style="text-decoration: none;">
+        @foreach ($tasks as $task)
+        <a class="col-md-12 block-20 zoom-effect" href="{{route('viewTask',['proj_id'=>$project_id ,'id'=>$task->id])}}" style="text-decoration: none;">
           <div class="resume-wrap ftco-animate">
-            <span class="date">Name</span>
-            <h2 class="">Assign to : <span class="fw-bold">Pollob Ray</span></h2>
+            <span class="date">{{$task->name}}</span>
+            <h2 class="">Assign to : <span class="fw-bold">{{$users[$task->user_id]}}</span></h2>
             <div class="d-flex flex-row justify-content-between">
-                <span class="position">Progress</span>
-                <span class="fw-bold text-danger" class="">Private</span>
+                <span class="position">{{$task->status}}</span>
+                <span class="fw-bold text-danger" class="">{{$task->privacy}}</span>
             </div>
           </div>
         </a>
+        @endforeach
 
         <a class="col-md-12 block-20 zoom-effect" href="{{ route('addTask', ['id' => $project_id]) }}" style="text-decoration: none;">
             <div class="resume-wrap ftco-animate"> 

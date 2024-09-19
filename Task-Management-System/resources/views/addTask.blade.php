@@ -32,7 +32,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                             <label class="form-label" for="form4Example1">Name</label>
                             <input name="name" type="text" id="form4Example1" class="form-control" />
                         </div>
-                    
+
                         <!-- Description input -->
                         <div data-mdb-input-init class="form-outline mb-4">
                             <label class="form-label" for="form4Example3">Description</label>
@@ -60,7 +60,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                             <label class="form-label" for="categoryOption">Deadline</label>
                             <input name="due_date" type="date" id="categoryOption" class="form-control">
                         </div>
-
+                        <input type="hidden" name='project_id' value={{$proj_id}}>
                         <!-- Submit button -->
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary">Create</button>

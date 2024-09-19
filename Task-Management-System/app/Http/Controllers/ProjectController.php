@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Projects;
 use App\Models\ProjectParticipant;
 use App\Models\User;
+use App\Models\Task;
 
 class ProjectController extends Controller
 {
@@ -73,36 +74,45 @@ class ProjectController extends Controller
     }
 
     
-    // show detail of category
+    // show detail of project
     public function show(int $id)
-{
-    $project = null;
+    {
+        $project = null;
 
-    if (Auth::check()) 
-    {// If the user is authenticated
-        $project = Projects::where(function($query) use ($id) {
-            $query->where('id', $id)
-                  ->where('privacy', 'public');
-        })
-        ->orWhereIn('id', ProjectParticipant::where('user_id', Auth::id())->pluck('project_id')->toArray())
-        ->first();
-    } 
-    else 
-    { // If the user is not authenticated, only public projects are available
-        $project = Projects::where('id', $id)
-                ->where('privacy', 'public')
-                ->first();
+        if (Auth::check()) 
+        {// If the user is authenticated
+            $project = Projects::where(function($query) use ($id) {
+                $query->where('id', $id)
+                    ->where('privacy', 'public');
+            })
+            ->orWhereIn('id', ProjectParticipant::where('user_id', Auth::id())->pluck('project_id')->toArray())
+            ->first();
+        } 
+        else 
+        { // If the user is not authenticated, only public projects are available
+            $project = Projects::where('id', $id)
+                    ->where('privacy', 'public')
+                    ->first();
+        }
+
+        if ($project == null) {
+            return redirect()->route('login');
+        }
+
+        $leader_id = $project->leader_id;
+        $leader = User::where('id', $leader_id)->first();
+
+        $tasks = Task::where('project_id', $id)->get();
+
+        $users = User::all()->pluck('name', 'id');
+
+        $totalCount = Task::where('project_id', $id)->count();
+        $totalCompleteCount = Task::where('project_id', $id)->where('status', 'completed')->count();
+        $completedPercentage = $totalCount > 0 ? ($totalCompleteCount / $totalCount) * 100 : 0;
+        $completedPercentage = round($completedPercentage);
+
+        return view('viewProject', ['project' => $project, 'leader'=> $leader, 'project_id' => $id, 'tasks'=>$tasks, 'users'=>$users, 'percentage'=>$completedPercentage]);
     }
-
-    if ($project == null) {
-        return redirect()->route('login');
-    }
-
-    $leader_id = $project->leader_id;
-    $leader = User::where('id', $leader_id)->first();
-
-    return view('viewProject', ['project' => $project, 'leader'=> $leader, 'project_id' => $id]);
-}
 
     
 

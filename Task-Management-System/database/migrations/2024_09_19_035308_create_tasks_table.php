@@ -12,26 +12,31 @@ return new class extends Migration
     public function up(): void
 {
     Schema::create('tasks', function (Blueprint $table) {
-        $table->id();
+        $table->id();  // Primary key
         $table->string('name');
         $table->text('description');
+        
+        // Project ID: Foreign key referencing projects table
         $table->unsignedBigInteger('project_id');
+        
+        // User ID: Foreign key referencing users table
         $table->unsignedBigInteger('user_id');  // Assigned to a user
-
+    
         // Status and privacy enums
         $table->enum('status', ['pending', 'in progress', 'completed'])->default('pending');
         $table->enum('privacy', ['public', 'private'])->default('public');
-
-        // Due date for the task
-        $table->string('due_date');
+    
+        // Due date for the task (changed to `date` type)
+        $table->date('due_date');
         
         // Foreign keys
-        $table->foreign('project_id')->references('id')->on('projects')->onDelete('CASCADE');
-        $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+        $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         
         // Track created and updated timestamps
-       // $table->timestamps();
+        $table->timestamps();  // Includes created_at and updated_at
     });
+    
 }
 
 
