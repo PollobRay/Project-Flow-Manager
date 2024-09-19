@@ -3,8 +3,8 @@
 
 @section('content') <!-- push some code into at yeild('content') of master.blade --> 
 
-<section class="vh-100 bg-image"
-style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+<section class=" bg-image"
+style="background-image: url('{{asset('assets/images/bg.png')}}'); width: 100%; height: 900px; background-size: cover; background-position: center;">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100 ">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -17,6 +17,9 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
             
             <div class="card-body p-5" >
               <h2 class="text-uppercase text-center mb-2">User Information</h2>
+              <div class="text-center mb-2">
+                <img src="{{asset('assets/images/bg.png')}}" alt="Photo" class="img-thumbnail" style="height: 10em; width:10em">
+              </div>
               <form action="{{route('updateUser')}}" method="POST">
                 @csrf
                 <div data-mdb-input-init class="form-outline mb-2">
@@ -26,6 +29,11 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
                 <div data-mdb-input-init class="form-outline mb-2">
                   <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" value="{{ Auth::user()->email }}" disabled />
                   <label class="form-label" for="form3Example3cg">Email</label>
+                </div>
+                 <!-- Image input -->
+                <div data-mdb-input-init class="form-outline mb-2">
+                  <input name="image" type="file" class="form-control" id="customFile" />
+                  <label class="form-label" for="customFile">Image</label>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-2">
                   <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" />

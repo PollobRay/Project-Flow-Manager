@@ -46,7 +46,7 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed
-            return redirect()->route('profile');
+            return redirect()->route('home');
         } else {
             // Authentication failed
             //dd('Login failed, credentials:', $credentials); // Debug to check what’s wrong

@@ -31,6 +31,7 @@
             <a type="button" class="btn btn-outline-success text-uppercase mb-2">Update</a>
             <a type="button" class="btn btn-outline-danger text-uppercase">Delete</a>
             <h2 class="text-uppercase fw-bold text-primary mt-2">{{$task->status}}</h2>
+            <div class="p-2"><h4 class="fw-bold">Deadline: <span>{{$task->due_date}}</span></h4></div>
         </div>   
     </div> 
     <br>

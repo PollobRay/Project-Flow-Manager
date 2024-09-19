@@ -38,7 +38,7 @@
           <!-- Left links -->
 
           <div class="d-flex align-items-center" style="margin-right: 8em">
-            <a  class="link-success link-underline-opacity-0 " href="{{route('profile')}}"><p class="h5 fw-bold" style="text-transform: uppercase; margin-right:1em">My Tasks</p></a>
+            <a  class="link-success link-underline-opacity-0 " href="{{route('myTasks')}}"><p class="h5 fw-bold" style="text-transform: uppercase; margin-right:1em">My Tasks</p></a>
             <a  class="link-success link-underline-opacity-0 " href="{{route('myprojects')}}"><p class="h5 fw-bold" style="text-transform: uppercase;">My Projects</p></a>
           </div>
 

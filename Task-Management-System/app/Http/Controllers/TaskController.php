@@ -132,7 +132,20 @@ class TaskController extends Controller
         }
     }
 
+    public function myTasks()
+    {
+        if(Auth::guest())
+        {
+            return redirect()->route('login');
+        }
 
+        $id = Auth::id();
+
+        $tasks = Task::where('user_id', $id)->orderBy('id', 'desc')->get();
+        $users = User::all()->pluck('name', 'id');
+
+        return view('myTasks',['tasks'=>$tasks, 'users'=>$users]);
+    }
 
     /*
     //edit category detail detail
