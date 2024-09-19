@@ -6,19 +6,35 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Projects;
+use App\Models\ProjectParticipant;
 
 class ProjectController extends Controller
 {
-    /*
-    // show all category
-    public function index()
+
+    // show all projects
+    public function index(int $id)
     {
-        $category = Category::all();
+        $projects = null;
+
+        if (Auth::check()) {
+            $projects = Projects::where(function($query) use ($id) {
+                $query->where('privacy', 'public')
+                    ->orWhereIn('id', ProjectParticipant::where('user_id', Auth::id())->pluck('project_id')->toArray());
+            })
+            ->where('category_id', $id)
+            ->get();
+        } else {
+            $projects = Projects::where('privacy', 'public')
+                        ->where('category_id', $id)
+                        ->get();
+        }
+
+        $categoryName = Category::where('id', $id)->pluck('name')->first();
         
-        return view('category',['categories'=>$category]);
+        return view('projects', ['projects' => $projects, 'categoryName' => $categoryName]);
     }
 
-    
+    /*
     // show detail of category
     public function show(int $id)
     {
@@ -62,7 +78,7 @@ class ProjectController extends Controller
             $file->move($path, $file_name);
         }
 
-        Projects::create([
+        $project = Projects::create([
             'name' => $request->name,
             'description' => $request->description,
             'image' => $file_name ? $path . $file_name : null,
@@ -71,9 +87,15 @@ class ProjectController extends Controller
             'category_id' => $request->category_id,
         ]);
 
+        $project_id = $project->id;
+        
+        //adding to participants
+        ProjectParticipant::create([
+            'project_id' => $project_id,
+            'user_id' => Auth::id(),
+        ]);
+
         return redirect()->route('addProject')->with('status','The Project created Successfully');
-        //dd('Login failed, credentials:', $value);
-        //return redirect()->route('addProject')->withErrors(['message' => 'failed']);
     }
 
     /*

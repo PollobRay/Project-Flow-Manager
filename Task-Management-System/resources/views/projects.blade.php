@@ -16,19 +16,19 @@
      <!----------------------------------- Categories ------------------------------------------->
 <div class="container">
 		<div class="row mt-5 mb-5">
-            <h1 class="big-4 ">Project Categories</h1>
+            <h1 class="big-4 ">Projects of {{$categoryName}} Category</h1>
             <div class="underline"></div>
         </div>
         <br>
 
         <div class="row d-flex">
-            @foreach ($categories as $category)
+            @foreach ($projects as $project)
             <div class="col-md-4 d-flex ftco-animate">
                 <div class="blog-entry justify-content-end">
-                <a href="" class="block-20 zoom-effect" style="background-image: url({{asset($category->image)}});"></a>
+                <a href="" class="block-20 zoom-effect" style="background-image: url({{asset($project->image)}});"></a>
                 <div class="text mt-3 float-right d-block">
-                    <h3 class="heading"><a href="{{ route('projects', ['id' => $category->id]) }}">{{$category->name}}</a></h3>
-                    <p>{{$category->description}}</p>
+                    <h3 class="heading"><a href="">{{$project->name}}</a></h3>
+                    <p></p>
                 </div>
                 </div>
             </div>

@@ -49,3 +49,4 @@ Route::post('storeCategory',[CategoryController::class,'store'])->name('storeCat
 
 Route::get('addProject',[ProjectController::class,'create'])->name('addProject');
 Route::post('storeProject',[ProjectController::class,'store'])->name('storeProject');
+Route::get('projects/{id}',[ProjectController::class,'index'])->whereNumber('id')->name('projects');
