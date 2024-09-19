@@ -35,9 +35,9 @@
             </div>
         </div>
         <div class="d-flex flex-column">
-            <button type="button" class="btn btn-outline-primary text-uppercase mb-2">Add User</button>
-            <button type="button" class="btn btn-outline-success text-uppercase mb-2">Update</button>
-            <button type="button" class="btn btn-outline-danger text-uppercase">Delete</button>
+            <a href="{{ route('addProjectUser', ['id' => $project_id]) }}" type="button" class="btn btn-outline-primary text-uppercase mb-2">Add User</a>
+            <a type="button" class="btn btn-outline-success text-uppercase mb-2">Update</a>
+            <a type="button" class="btn btn-outline-danger text-uppercase">Delete</a>
             <h2 class="text-uppercase fw-bold text-primary mt-2">Completed: <span class="text-danger">90%</span></h2>
         </div>
         

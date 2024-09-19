@@ -25,7 +25,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                 @endif
 
                 <div class="mt-4">
-                    <form action="" class="mx-auto" enctype="multipart/form-data" method="POST">
+                    <form action="{{route('storeTask', ['id' => $proj_id])}}" class="mx-auto" enctype="multipart/form-data" method="POST">
                         @csrf
                         <!-- Name input -->
                         <div data-mdb-input-init class="form-outline mb-4">
@@ -41,7 +41,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                         
                         <div data-mdb-input-init class="form-outline mb-4">
                             <label class="form-label" for="categoryOption">Assign to </label>
-                            <select id="categoryOption" name="category_id" style="margin-left: 20px">
+                            <select id="user_id" name="user_id" style="margin-left: 20px">
                                 @foreach($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name}} - {{ $user->email}}</option>
                             @endforeach
@@ -58,7 +58,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
 
                         <div data-mdb-input-init class="form-outline mb-4">
                             <label class="form-label" for="categoryOption">Deadline</label>
-                            <input type="date" id="categoryOption" class="form-control"> 
+                            <input name="due_date" type="date" id="categoryOption" class="form-control">
                         </div>
 
                         <!-- Submit button -->

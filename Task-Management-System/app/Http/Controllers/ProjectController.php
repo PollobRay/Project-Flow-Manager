@@ -222,4 +222,41 @@ class ProjectController extends Controller
         return redirect()->route('home')->with('status','Member Deleted Successfully');
     }
     */
+
+    public function indexParticipant(int $id)
+    {
+        $users = User::whereNotIn('id', function($query) use ($id) {
+            $query->select('user_id')
+                  ->from('project_participants')
+                  ->where('project_id', $id);
+        })->get();
+
+        return view('addProjectParticipant', ['users'=>$users, 'project_id'=>$id]);
+    }
+
+    public function storeParticipant(int $proj_id, int $user_id)
+    {
+        $project = Projects::find($proj_id);
+        $leader_id = 0;
+
+        if($project)
+        {
+            $leader_id = $project->leader_id;
+        }
+
+        if(Auth::check() && Auth::id() == $leader_id)
+        {
+            ProjectParticipant::create([
+                'project_id' => $proj_id,
+                'user_id' => $user_id,
+            ]);
+            
+            return redirect()->route('addProjectUser', ['id' => $proj_id]) ->with('status','The Participant Successfully added to Project');
+        }
+        else
+        {
+            return redirect()->route('addProjectUser', ['id' => $proj_id])
+                                ->with('status', 'Only Project Leader Can Add Participant');
+        } 
+    }
 }

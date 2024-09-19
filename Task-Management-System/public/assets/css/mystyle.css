@@ -17,7 +17,7 @@
     background-origin: padding-box;
     background-clip: border-box;
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     border-radius: 5px;
     padding: 10px;
     font-family: "Poppins", Arial, sans-serif;
@@ -51,7 +51,7 @@
   .blog-entry {
     position: relative;
     overflow: hidden;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     background-color:rgba(126, 162, 241, 0.562);
   }
   

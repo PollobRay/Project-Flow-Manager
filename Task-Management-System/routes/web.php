@@ -54,5 +54,9 @@ Route::get('projects/{id}',[ProjectController::class,'index'])->whereNumber('id'
 Route::get('allprojects',[ProjectController::class,'indexAll'])->name('allprojects');
 Route::get('myprojects',[ProjectController::class,'indexMy'])->name('myprojects');
 Route::get('viewProject/{id}',[ProjectController::class,'show'])->whereNumber('id')->name('viewProject');
+Route::get('addProjectUser/{id}',[ProjectController::class,'indexParticipant'])->whereNumber('id')->name('addProjectUser');
+Route::get('storeProjectParticipant/{proj_id}/{user_id}',[ProjectController::class,'storeParticipant'])->whereNumber('proj_id')->whereNumber('user_id')->name('storeProjectParticipant');
 
 Route::get('addTask/{id}',[TaskController::class,'create'])->whereNumber('id')->name('addTask');
+Route::post('addTask/{id}',[TaskController::class,'store'])->whereNumber('id')->name('storeTask');
+

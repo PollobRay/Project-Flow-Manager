@@ -23,7 +23,7 @@ return new class extends Migration
         $table->enum('privacy', ['public', 'private'])->default('public');
 
         // Due date for the task
-        $table->date('due_date');
+        $table->string('due_date');
         
         // Foreign keys
         $table->foreign('project_id')->references('id')->on('projects')->onDelete('CASCADE');

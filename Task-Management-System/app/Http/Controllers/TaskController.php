@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\Projects;
 use App\Models\ProjectParticipant;
 use App\Models\User;
+use App\Models\Task;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -72,60 +74,52 @@ class TaskController extends Controller
     // create task
     public function create(int $id)
     {
-         //$category = Category::all();
-        //$users = User::whereIn('id', ProjectParticipant::where('project_id', $id)->pluck('user_id')->toArray());
-
         $users = User::whereIn('id', function($query) use ($id) {
             $query->select('user_id')
                   ->from('project_participants')
                   ->where('project_id', $id);
         })->get();
         
-        return view('addTask', ['users'=> $users]);
+        return view('addTask', ['users'=> $users, 'proj_id'=>$id]);
     }
 
-    /*
-    // store project
-    public function store(Request $request)
-    {
+    
+    // store Task
+    public function store(Request $request, int $id)
+    { 
         $value = $request->validate([
-            'name' => 'required|max:255|string|unique:projects,name',
+            'name' => 'required|max:255|string',
             'description' => 'required',
-            'image' => 'nullable|mimes:png,jpg,jpeg',
             'privacy' => 'required|in:public,private',
-            'category_id' => 'required|exists:categories,id',
+            'due_date' => 'required',
         ]);
 
-        $file_name = null; // Initialize file_name as null
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $file_name = time() . '.' . $extension;
-            $path = 'uploads/category/';
-            $file->move($path, $file_name);
+        $project = Projects::find($id);  // Find the project by its ID
+        $leader_id = $project->leader_id;
+
+        if(Auth::check() && Auth::id() == $leader_id)
+        {
+            Task::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'project_id' => 4,  // Ensure the project ID is passed here
+                'user_id' => $request->user_id,
+                'status' => 'pending',
+                'privacy' => $request->privacy,
+                'due_date' => $request->due_date,
+            ]);
+    
+            return redirect()->route('addTask', ['id'=>$id])->with('status','The Task is created Successfully ');
+        }
+        else
+        {
+            return redirect()->route('addTask', ['id'=>$id])->with('status','Only Project Leader can Create Task');
         }
 
-        $project = Projects::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $file_name ? $path . $file_name : null,
-            'privacy' => $request->privacy,
-            'leader_id' => Auth::id(),
-            'category_id' => $request->category_id,
-        ]);
-
-        $project_id = $project->id;
-
-        //adding to participants
-        ProjectParticipant::create([
-            'project_id' => $project_id,
-            'user_id' => Auth::id(),
-        ]);
-
-        return redirect()->route('addProject')->with('status','The Project created Successfully');
+        return redirect()->route('addTask', ['id'=>$id])->with('status','Hi');
     }
 
-    */
+
 
     /*
     //edit category detail detail
