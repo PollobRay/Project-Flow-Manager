@@ -25,7 +25,7 @@
             @foreach ($categories as $category)
             <div class="col-md-4 d-flex ftco-animate">
                 <div class="blog-entry justify-content-end">
-                <a href="" class="block-20 zoom-effect" style="background-image: url({{asset($category->image)}});"></a>
+                <a href="{{ route('projects', ['id' => $category->id]) }}" class="block-20 zoom-effect" style="background-image: url({{asset($category->image)}});"></a>
                 <div class="text mt-3 float-right d-block">
                     <h3 class="heading"><a href="{{ route('projects', ['id' => $category->id]) }}">{{$category->name}}</a></h3>
                     <p>{{$category->description}}</p>

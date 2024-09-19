@@ -22,7 +22,7 @@ class ProjectController extends Controller
                     ->orWhereIn('id', ProjectParticipant::where('user_id', Auth::id())->pluck('project_id')->toArray());
             })
             ->where('category_id', $id)
-            ->get();
+            ->get(); 
         } else {
             $projects = Projects::where('privacy', 'public')
                         ->where('category_id', $id)
@@ -88,7 +88,7 @@ class ProjectController extends Controller
         ]);
 
         $project_id = $project->id;
-        
+
         //adding to participants
         ProjectParticipant::create([
             'project_id' => $project_id,

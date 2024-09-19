@@ -36,9 +36,9 @@
 
             <div class="col-md-4 d-flex ftco-animate">
                 <div class="blog-entry justify-content-end" style="padding: 30px">
-                <a href="{{route('addCategory')}}" class="block-20 zoom-effect" style="background-image: url({{'assets/images/add.png'}});"></a>
+                <a href="{{ route('addProject') }}" class="block-20 zoom-effect" style="background-image: url('{{ asset('assets/images/add.png') }}');"></a>
                 <div class="text mt-3 float-right d-block">
-                    <h3 class="heading"><a href="{{route('addCategory')}}">   Add New Project Category   </a></h3>
+                    <h3 class="heading"><a href="{{route('addProject')}}">   Create a New Project in the Category   </a></h3>
                     <p></p>
                 </div>
                 </div>

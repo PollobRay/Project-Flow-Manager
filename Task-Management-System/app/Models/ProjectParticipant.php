@@ -18,4 +18,6 @@ class ProjectParticipant extends Model
 
     //or
     //protected $guarded = [];
+
+    public $timestamps = false ; //created_at, updated_at column not to include
 }
