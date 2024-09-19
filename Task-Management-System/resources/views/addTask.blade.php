@@ -39,14 +39,17 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                             <textarea name="description" class="form-control" id="form4Example3" rows="4"></textarea> 
                         </div>
                         
-                        <!-- Image input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="customFile">Image</label>
-                            <input name="image" type="file" class="form-control" id="customFile" />
+                            <label class="form-label" for="categoryOption">Assign to </label>
+                            <select id="categoryOption" name="category_id" style="margin-left: 20px">
+                                @foreach($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name}} - {{ $user->email}}</option>
+                            @endforeach
+                            </select> 
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="privacyOption">Privacy  </label>
+                            <label class="form-label" for="privacyOption">Privacy </label>
                             <select id="privacyOption" name="privacy" style="margin-left: 20px">
                               <option value="public">public</option>
                               <option value="private">private</option>
@@ -54,12 +57,8 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="categoryOption">Category </label>
-                            <select id="categoryOption" name="category_id" style="margin-left: 20px">
-                                @foreach($categories as $category)
-                                <option value=""></option>
-                            @endforeach
-                            </select> 
+                            <label class="form-label" for="categoryOption">Deadline</label>
+                            <input type="date" id="categoryOption" class="form-control"> 
                         </div>
 
                         <!-- Submit button -->

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,4 @@ Route::get('allprojects',[ProjectController::class,'indexAll'])->name('allprojec
 Route::get('myprojects',[ProjectController::class,'indexMy'])->name('myprojects');
 Route::get('viewProject/{id}',[ProjectController::class,'show'])->whereNumber('id')->name('viewProject');
 
-Route::get('addTask',[TaskController::class,'create'])->name('addTask');
+Route::get('addTask/{id}',[TaskController::class,'create'])->whereNumber('id')->name('addTask');

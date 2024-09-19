@@ -35,9 +35,10 @@
             </div>
         </div>
         <div class="d-flex flex-column">
-            <button type="button" class="btn btn-lg btn-outline-success text-uppercase mb-2">Update</button>
-            <button type="button" class="btn btn-lg btn-outline-danger text-uppercase">Delete</button>
-            <h2 class="text-uppercase fw-bold text-primary mt-4">Completed: <span class="text-danger">90%</span></h2>
+            <button type="button" class="btn btn-outline-primary text-uppercase mb-2">Add User</button>
+            <button type="button" class="btn btn-outline-success text-uppercase mb-2">Update</button>
+            <button type="button" class="btn btn-outline-danger text-uppercase">Delete</button>
+            <h2 class="text-uppercase fw-bold text-primary mt-2">Completed: <span class="text-danger">90%</span></h2>
         </div>
         
     </div> 
@@ -60,7 +61,7 @@
           </div>
         </a>
 
-        <a class="col-md-12 block-20 zoom-effect" href="{{route('addTask')}}" style="text-decoration: none;">
+        <a class="col-md-12 block-20 zoom-effect" href="{{ route('addTask', ['id' => $project_id]) }}" style="text-decoration: none;">
             <div class="resume-wrap ftco-animate"> 
               <div class="d-flex flex-row justify-content-between">
                 <span class="date text-danger text-uppercase fw-bold" >Add New Task</span>

@@ -101,7 +101,7 @@ class ProjectController extends Controller
     $leader_id = $project->leader_id;
     $leader = User::where('id', $leader_id)->first();
 
-    return view('viewProject', ['project' => $project, 'leader'=> $leader]);
+    return view('viewProject', ['project' => $project, 'leader'=> $leader, 'project_id' => $id]);
 }
 
     
