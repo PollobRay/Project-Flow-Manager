@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -29,7 +30,10 @@ class CategoryController extends Controller
     // create category
     public function create()
     {
-        return view('addCategory');
+        if(Auth::check())
+            return view('addCategory');
+        else
+            return redirect()->route('login');
     }
 
     

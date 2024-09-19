@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,6 @@ Route::post('updateUser',[UserController::class,'updateUser'])->name('updateUser
 Route::get('category',[CategoryController::class,'index'])->name('category');
 Route::get('addCategory',[CategoryController::class,'create'])->name('addCategory');
 Route::post('storeCategory',[CategoryController::class,'store'])->name('storeCategory');
+
+Route::get('addProject',[ProjectController::class,'create'])->name('addProject');
+Route::post('storeProject',[ProjectController::class,'store'])->name('storeProject');
