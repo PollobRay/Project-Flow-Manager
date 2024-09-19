@@ -50,3 +50,8 @@ Route::post('storeCategory',[CategoryController::class,'store'])->name('storeCat
 Route::get('addProject',[ProjectController::class,'create'])->name('addProject');
 Route::post('storeProject',[ProjectController::class,'store'])->name('storeProject');
 Route::get('projects/{id}',[ProjectController::class,'index'])->whereNumber('id')->name('projects');
+Route::get('allprojects',[ProjectController::class,'indexAll'])->name('allprojects');
+Route::get('myprojects',[ProjectController::class,'indexMy'])->name('myprojects');
+Route::get('viewProject/{id}',[ProjectController::class,'show'])->whereNumber('id')->name('viewProject');
+
+Route::get('addTask',[TaskController::class,'create'])->name('addTask');

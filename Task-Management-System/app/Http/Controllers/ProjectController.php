@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Projects;
 use App\Models\ProjectParticipant;
+use App\Models\User;
 
 class ProjectController extends Controller
 {
 
-    // show all projects
+    // show all projects on specific category
     public function index(int $id)
     {
         $projects = null;
@@ -34,15 +35,76 @@ class ProjectController extends Controller
         return view('projects', ['projects' => $projects, 'categoryName' => $categoryName]);
     }
 
-    /*
+    //show all project
+    public function indexAll()
+    {
+        $projects = null;
+
+        if (Auth::check()) {
+            $projects = Projects::where(function($query) {
+                $query->where('privacy', 'public')
+                    ->orWhereIn('id', ProjectParticipant::where('user_id', Auth::id())->pluck('project_id')->toArray());
+            })
+            ->get()->sortByDesc('id'); 
+        } else {
+            $projects = Projects::where('privacy', 'public')
+                        ->get()
+                        ->sortByDesc('id');
+        }
+        
+        return view('allProjects', ['projects' => $projects]);
+    }
+
+    //show all project
+    public function indexMy()
+    {
+        if (Auth::check()) {
+            $projects = Projects::where(function($query) {
+                $query->WhereIn('id', ProjectParticipant::where('user_id', Auth::id())->pluck('project_id')->toArray());
+            })
+            ->get()->sortByDesc('id'); 
+
+            return view('myProjects', ['projects' => $projects]);
+        } else {
+            return redirect()->route('login');
+        }
+        
+        
+    }
+
+    
     // show detail of category
     public function show(int $id)
-    {
-        $member = Category::find($id);
+{
+    $project = null;
 
-        return view('view_member',['member'=>$member]); 
+    if (Auth::check()) 
+    {// If the user is authenticated
+        $project = Projects::where(function($query) use ($id) {
+            $query->where('id', $id)
+                  ->where('privacy', 'public');
+        })
+        ->orWhereIn('id', ProjectParticipant::where('user_id', Auth::id())->pluck('project_id')->toArray())
+        ->first();
+    } 
+    else 
+    { // If the user is not authenticated, only public projects are available
+        $project = Projects::where('id', $id)
+                ->where('privacy', 'public')
+                ->first();
     }
-        */
+
+    if ($project == null) {
+        return redirect()->route('login');
+    }
+
+    $leader_id = $project->leader_id;
+    $leader = User::where('id', $leader_id)->first();
+
+    return view('viewProject', ['project' => $project, 'leader'=> $leader]);
+}
+
+    
 
     // create project
     public function create()

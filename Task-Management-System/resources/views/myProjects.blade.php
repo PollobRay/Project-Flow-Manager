@@ -16,7 +16,7 @@
      <!----------------------------------- Categories ------------------------------------------->
 <div class="container">
 		<div class="row mt-5 mb-5">
-            <h1 class="big-4 ">Projects of {{$categoryName}} Category</h1>
+            <h1 class="big-4 ">My Projects</h1>
             <div class="underline"></div>
         </div>
         <br>
@@ -38,7 +38,7 @@
                 <div class="blog-entry justify-content-end" style="padding: 30px">
                 <a href="{{ route('addProject') }}" class="block-20 zoom-effect" style="background-image: url('{{ asset('assets/images/add.png') }}');"></a>
                 <div class="text mt-3 float-right d-block">
-                    <h3 class="heading"><a href="{{route('addProject')}}">   Create a New Project in the Category   </a></h3>
+                    <h3 class="heading"><a href="{{route('addProject')}}">   Create a New Project </a></h3>
                     <p></p>
                 </div>
                 </div>

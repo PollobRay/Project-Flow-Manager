@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset("assets/css/bootstrap.min.css")}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset("assets/css/mystyle.css")}}">
     <title>Document</title>
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg " style="background: rgba(198, 211, 240, 0.562)">
       <!-- Container wrapper -->
-      <div class="container">
+      <div class="container" >
         <!-- Toggle button -->
         <button
           data-mdb-collapse-init
@@ -36,9 +37,14 @@
           </ul>
           <!-- Left links -->
 
+          <div class="d-flex align-items-center" style="margin-right: 8em">
+            <a  class="link-success link-underline-opacity-0 " href="{{route('profile')}}"><p class="h5 fw-bold" style="text-transform: uppercase; margin-right:1em">My Tasks</p></a>
+            <a  class="link-success link-underline-opacity-0 " href="{{route('myprojects')}}"><p class="h5 fw-bold" style="text-transform: uppercase;">My Projects</p></a>
+          </div>
+
           <div class="d-flex align-items-center">
             @if (Auth::check())
-            <a  class="h5" href="{{route('profile')}}">
+            <a  class="h5 link-danger" href="{{route('profile')}}">
               {{Auth::user()->name}}
             </a>    
             @else

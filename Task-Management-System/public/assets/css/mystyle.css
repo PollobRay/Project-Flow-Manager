@@ -12,29 +12,29 @@
 }
 
 .resume-wrap{
-    background-color: rgba(82, 57, 57, 0.973);
+    background-color: rgba(126, 162, 241, 0.562);
     background-size: auto;
     background-origin: padding-box;
     background-clip: border-box;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     border-radius: 5px;
-    padding: 30px;
+    padding: 10px;
     font-family: "Poppins", Arial, sans-serif;
     font-size: 16px;
     line-height: 1.8;
-    color: #c0c0c0;
+    color: #6e0707;
 }
 
 .date{
-    color: #ffbd39;
+    color: #020202;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
   }
   
 .resume-wrap h2{
-    color: white;
-    font-size: 26px;
+    color: rgb(124, 28, 28);
+    font-size: 20px;
   }
   
 .position{
@@ -42,7 +42,7 @@
     font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #76d6ee; /* #c0c0c0 */
+    color: #024050; /* #c0c0c0 */
   }
 
 
