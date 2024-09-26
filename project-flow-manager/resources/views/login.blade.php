@@ -16,20 +16,20 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
                 @csrf
                 <div data-mdb-input-init class="form-outline mb-2">
                   <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example3cg">Email</label>
+                  <label class="form-label h5" for="form3Example3cg">Email</label>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-2">
                   <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cg">Password</label>
+                  <label class="form-label h5" for="form3Example4cg">Password</label>
                 </div>
                 <div class="form-check d-flex justify-content-center">
                   <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                  <label class="form-check-label mb-4" for="form2Example3g">
+                  <label class="form-check-label mb-2" for="form2Example3g">
                     Remember Me 
                   </label>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <button  type="submit"  class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
+                  <button  type="submit"  class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">Login</button>
                 </div>
                 <p class="text-center text-muted mt-1 mb-0">Not have an account? <a href="{{route('signup')}}"
                     class="fw-bold text-body"><u>Register here</u></a></p>

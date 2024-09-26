@@ -145,7 +145,7 @@ class ProjectController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $file_name = time() . '.' . $extension;
-            $path = 'uploads/category/';
+            $path = 'uploads/projects/';
             $file->move($path, $file_name);
         }
 

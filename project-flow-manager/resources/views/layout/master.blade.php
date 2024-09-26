@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset("assets/css/bootstrap.min.css")}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset("assets/css/mystyle.css")}}">
-    <title>Document</title>
+    <title>Project Flow Manager</title>
 </head>
 <body>
     <!-- Navbar -->
@@ -32,7 +32,7 @@
           <!-- Left links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="{{route('home')}}" style="font-weight: bold; font-size: 24px; color: black; text-transform: uppercase;">Task Management System</a>
+              <a class="nav-link" href="{{route('home')}}" style="font-weight: bold; font-size: 24px; color: black; text-transform: uppercase;">Project Flow Manager</a>
             </li>
           </ul>
           <!-- Left links -->

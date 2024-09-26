@@ -16,23 +16,23 @@ style="background-image: url('{{asset('assets/images/bg.png')}}'); width: 100%; 
                 @csrf
                 <div data-mdb-input-init class="form-outline mb-2">
                   <input type="text" name="name" id="form3Example1cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example1cg">Full Name</label>
+                  <label class="form-label h5" for="form3Example1cg">Full Name</label>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-2">
                   <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example3cg">Email</label>
+                  <label class="form-label h5" for="form3Example3cg">Email</label>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-2">
                   <input name="image" type="file" class="form-control" id="customFile" />
-                  <label class="form-label" for="customFile">Image</label>
+                  <label class="form-label h5" for="customFile">Image</label>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-2">
                   <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cg">Password</label>
+                  <label class="form-label h5" for="form3Example4cg">Password</label>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-2">
                   <input type="password" name="password_confirmation" id="form3Example4cdg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cdg">Repeat Password</label>
+                  <label class="form-label h5" for="form3Example4cdg">Repeat Password</label>
                 </div>
                 <div class="form-check d-flex justify-content-center">
                   <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
@@ -41,7 +41,7 @@ style="background-image: url('{{asset('assets/images/bg.png')}}'); width: 100%; 
                   </label>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <button  type="submit"  class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                  <button  type="submit"  class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">Register</button>
                 </div>
                 <p class="text-center text-muted mt-1 mb-0">Have already an account? <a href="{{route('login')}}"
                     class="fw-bold text-body"><u>Login here</u></a></p>

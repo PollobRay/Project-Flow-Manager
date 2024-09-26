@@ -27,9 +27,9 @@
             </div>
         </div>
         <div class="d-flex flex-column">
-            <a href="{{route('markAsComplete', ['proj_id'=> $proj_id, 'id'=>$task->id])}}" type="button" class="btn btn-outline-primary text-uppercase mb-2">Mark As Complete</a>
-            <a type="button" class="btn btn-outline-success text-uppercase mb-2">Update</a>
-            <a type="button" class="btn btn-outline-danger text-uppercase">Delete</a>
+            <a href="{{route('markAsComplete', ['proj_id'=> $proj_id, 'id'=>$task->id])}}" type="button" class="btn btn-outline-primary text-uppercase fw-bold mb-2">Mark As Complete</a>
+            <a type="button" class="btn btn-outline-success text-uppercase fw-bold mb-2">Update</a>
+            <a type="button" class="btn btn-outline-danger text-uppercase fw-bold">Delete</a>
             <h2 class="text-uppercase fw-bold text-primary mt-2">{{$task->status}}</h2>
             <div class="p-2"><h4 class="fw-bold">Deadline: <span>{{$task->due_date}}</span></h4></div>
         </div>   
@@ -42,7 +42,20 @@
     <div class="row">
         <p class="h4">{{$task->description}}</p>
     </div>  
-    
+    <div class="row mt-5 mb-5">
+    </div>
+    <div class="row">
+        <form action="" method="post">
+            @csrf
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label h4 text-uppercase fw-bold" for="form4Example3">Response Message:</label>
+                <textarea name="description" class="form-control" id="form4Example3" rows="4" style="background-color: rgba(211, 229, 247, 0.658)"></textarea> 
+            </div>
+            <div class="d-flex justify-content-center mb-5">
+                <button type="submit" class="btn btn-outline-danger btn-lg h5 fw-bold">Submit Response</button>
+            </div>
+        </form>
+    </div>
     
 </div>
 @endsection

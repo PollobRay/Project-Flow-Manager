@@ -29,18 +29,18 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                         @csrf
                         <!-- Name input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form4Example1">Name</label>
+                            <label class="form-label h5" for="form4Example1">Name</label>
                             <input name="name" type="text" id="form4Example1" class="form-control" />
                         </div>
 
                         <!-- Description input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form4Example3">Description</label>
+                            <label class="form-label h5" for="form4Example3">Description</label>
                             <textarea name="description" class="form-control" id="form4Example3" rows="4"></textarea> 
                         </div>
                         
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="categoryOption">Assign to </label>
+                            <label class="form-label h5" for="categoryOption">Assign to </label>
                             <select id="user_id" name="user_id" style="margin-left: 20px">
                                 @foreach($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name}} - {{ $user->email}}</option>
@@ -49,7 +49,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="privacyOption">Privacy </label>
+                            <label class="form-label h5" for="privacyOption">Privacy </label>
                             <select id="privacyOption" name="privacy" style="margin-left: 20px">
                               <option value="public">public</option>
                               <option value="private">private</option>
@@ -57,7 +57,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="categoryOption">Deadline</label>
+                            <label class="form-label h5" for="categoryOption">Deadline</label>
                             <input name="due_date" type="date" id="categoryOption" class="form-control">
                         </div>
                         <input type="hidden" name='project_id' value={{$proj_id}}>

@@ -29,19 +29,19 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                         @csrf
                         <!-- Name input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form4Example1">Name</label>
+                            <label class="form-label h5" for="form4Example1">Name</label>
                             <input name="name" type="text" id="form4Example1" class="form-control" />
                         </div>
                     
                         <!-- Description input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form4Example3">Description</label>
+                            <label class="form-label h5" for="form4Example3">Description</label>
                             <textarea name="description" class="form-control" id="form4Example3" rows="4"></textarea> 
                         </div>
                         
                         <!-- Image input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="customFile">Image</label>
+                            <label class="form-label h5" for="customFile">Image</label>
                             <input name="image" type="file" class="form-control" id="customFile" />
                         </div>
 

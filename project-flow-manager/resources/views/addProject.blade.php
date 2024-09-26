@@ -29,24 +29,24 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                         @csrf
                         <!-- Name input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form4Example1">Name</label>
+                            <label class="form-label h5" for="form4Example1">Name</label>
                             <input name="name" type="text" id="form4Example1" class="form-control" />
                         </div>
                     
                         <!-- Description input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form4Example3">Description</label>
+                            <label class="form-label h5" for="form4Example3">Description</label>
                             <textarea name="description" class="form-control" id="form4Example3" rows="4"></textarea> 
                         </div>
                         
                         <!-- Image input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="customFile">Image</label>
+                            <label class="form-label h5" for="customFile">Image</label>
                             <input name="image" type="file" class="form-control" id="customFile" />
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="privacyOption">Privacy  </label>
+                            <label class="form-label h5" for="privacyOption">Privacy  </label>
                             <select id="privacyOption" name="privacy" style="margin-left: 20px">
                               <option value="public">public</option>
                               <option value="private">private</option>
@@ -54,7 +54,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="categoryOption">Category </label>
+                            <label class="form-label h5" for="categoryOption">Category </label>
                             <select id="categoryOption" name="category_id" style="margin-left: 20px">
                                 @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name}}</option>
@@ -64,7 +64,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
 
                         <!-- Submit button -->
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">Create</button>
+                            <button type="submit" class="btn btn-primary h5">Create</button>
                         </div>
                     </form>
                 </div>
