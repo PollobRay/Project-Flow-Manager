@@ -45,14 +45,14 @@
     <div class="row mt-5 mb-5">
     </div>
     <div class="row">
-        <form action="" method="post">
+        <form action="{{route('addTaskResponse',['proj_id'=>$proj_id ,'id'=>$task->id])}}" method="post">
             @csrf
             <div data-mdb-input-init class="form-outline mb-4">
                 <label class="form-label h4 text-uppercase fw-bold" for="form4Example3">Response Message:</label>
-                <textarea name="description" class="form-control" id="form4Example3" rows="4" style="background-color: rgba(211, 229, 247, 0.658)"></textarea> 
+                <textarea name="message" class="form-control" id="form4Example3" rows="4" style="background-color: rgba(211, 229, 247, 0.658)">@if($response) {{ $response->message }} @endif</textarea> 
             </div>
             <div class="d-flex justify-content-center mb-5">
-                <button type="submit" class="btn btn-outline-danger btn-lg h5 fw-bold">Submit Response</button>
+                <button type="submit" class="btn btn-outline-danger btn-lg h5 fw-bold">@if($response) {{"Update Response"}} @else {{"Submit Response"}} @endif</button>
             </div>
         </form>
     </div>

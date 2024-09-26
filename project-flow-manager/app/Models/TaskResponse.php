@@ -13,6 +13,7 @@ class TaskResponse extends Model
 
     protected $fillable = [
         'message',
+        'task_id',
     ];
     	 	 	 	
     //or

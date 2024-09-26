@@ -9,6 +9,7 @@ use App\Models\Projects;
 use App\Models\ProjectParticipant;
 use App\Models\User;
 use App\Models\Task;
+use App\Models\TaskResponse;
 use Carbon\Carbon;
 
 class TaskController extends Controller
@@ -48,6 +49,9 @@ class TaskController extends Controller
         $user = User::find($assign_to);
         $project = Projects::find($proj_id);
 
+        //Finding Task Responses
+        $task_response = TaskResponse::where('task_id', $id)->first();
+
         if(Auth::check() && (Auth::id() == $assign_to || Auth::id() == $project->leader_id))
         {
             if(Auth::id() == $assign_to && $task->status == 'pending')
@@ -57,11 +61,11 @@ class TaskController extends Controller
                     'status' => 'in progress',
                 ]);
             }
-            return view('viewTask', ['task' => $task, 'user'=>$user, 'proj_id'=>$proj_id]);
+            return view('viewTask', ['task' => $task, 'user'=>$user, 'proj_id'=>$proj_id, 'response'=>$task_response]);
         }
         else if($privacy == 'public')
         {
-            return view('viewTask', ['task' => $task, 'user'=>$user, 'proj_id'=>$proj_id]);
+            return view('viewTask', ['task' => $task, 'user'=>$user, 'proj_id'=>$proj_id, 'response'=>$task_response]);
         }
         else
         {
@@ -132,7 +136,7 @@ class TaskController extends Controller
         }
     }
 
-    public function myTasks()
+    public function myTasks(int $proj_id, int $id)
     {
         if(Auth::guest())
         {
@@ -145,6 +149,45 @@ class TaskController extends Controller
         $users = User::all()->pluck('name', 'id');
 
         return view('myTasks',['tasks'=>$tasks, 'users'=>$users]);
+    }
+
+    public function storeTaskResponse(Request $request, int $proj_id, int $id)
+    {
+        $value = $request->validate([
+            'message' => 'required|max:255|string',
+        ]);
+
+        $task = Task::find($id);
+        $assign_to = $task->user_id;
+
+        if(Auth::check() && Auth::id() == $assign_to)
+        {   
+            if($task->status == 'completed') // If already mark completed
+            {
+                return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $proj_id])->with('status', 'The Task is already marked as Completed');
+            }
+
+            //Finding Task Responses
+            $task_response = TaskResponse::where('task_id', $id)->first();
+
+            if(!$task_response) //if the response not found then save operation
+            {
+                //save operation
+                TaskResponse::create([
+                    'message' => $request->message,
+                    'task_id' => $id,
+                ]);
+            }
+            else // response found then update response
+            {
+                //Update message
+                TaskResponse::where('id',$task_response->id)->update([
+                    'message' => $request->message,
+                 ]);
+            }
+            return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $proj_id])->with('status', 'Task Response Provided Successfully');
+        }
+        return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $proj_id])->with('status', 'Only Assigned User can Provide Task Response');
     }
 
     /*
