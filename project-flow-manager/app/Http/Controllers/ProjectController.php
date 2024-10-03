@@ -166,7 +166,50 @@ class ProjectController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        return redirect()->route('addProject')->with('status','The Project created Successfully');
+        //return redirect()->route('addProject')->with('status','The Project created Successfully');
+        return redirect()->route('myprojects')->with('status','The Project created Successfully');
+    }
+
+    // update Project
+    public function updateWindow(int $id)
+    {
+
+        if (Auth::check()) 
+        {// If the user is authenticated as leader
+            $project = Projects::where(function($query) use ($id) {
+                $query->where('id', $id);
+            })
+            ->where('leader_id', Auth::id()) // Chained 'where' for AND condition
+            ->first();
+
+            if($project)
+            {
+                $category = Category::all();
+
+                return view('updateProject', ['project' => $project, 'categories' => $category, 'selectedPrivacy' => $project->privacy, 'selectedCategory' => $project->category_id]);
+            }
+        } 
+
+        $project = Projects::where('id', $id)->first();
+
+        $leader_id = $project->leader_id;
+        $leader = User::where('id', $leader_id)->first();
+
+        $tasks = Task::where('project_id', $id)->get();
+
+        $users = User::all()->pluck('name', 'id');
+
+        $totalCount = Task::where('project_id', $id)->count();
+        $totalCompleteCount = Task::where('project_id', $id)->where('status', 'completed')->count();
+        $completedPercentage = $totalCount > 0 ? ($totalCompleteCount / $totalCount) * 100 : 0;
+        $completedPercentage = round($completedPercentage);
+
+        return redirect()->route('viewProject', $id)->with('status','Only leader can update the Project');
+    }
+
+    public function makeUpdateProject(Request $request, int $id)
+    {
+        
     }
 
     /*

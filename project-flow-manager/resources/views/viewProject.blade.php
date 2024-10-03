@@ -36,7 +36,7 @@
         </div>
         <div class="d-flex flex-column">
             <a href="{{ route('addProjectUser', ['id' => $project_id]) }}" type="button" class="btn btn-outline-primary text-uppercase mb-2">Add User</a>
-            <a type="button" class="btn btn-outline-success text-uppercase mb-2">Update</a>
+            <a href="{{ route('updateProject', ['id' => $project_id]) }}" type="button" class="btn btn-outline-success text-uppercase mb-2">Update</a>
             <a type="button" class="btn btn-outline-danger text-uppercase">Delete</a>
             <h2 class="text-uppercase fw-bold text-primary mt-2">Completed: <span class="text-danger">{{$percentage}}%</span></h2>
         </div>

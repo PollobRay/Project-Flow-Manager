@@ -48,7 +48,7 @@
               {{Auth::user()->name}}
             </a>    
             @else
-            <a  class="btn btn-outline-success" href="{{route('login')}}">
+            <a  class="btn btn-lg btn-outline-success" href="{{route('login')}}">
               Login
             </a>
             @endif
