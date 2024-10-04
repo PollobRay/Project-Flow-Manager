@@ -248,7 +248,39 @@ class ProjectController extends Controller
 
     public function deleteProject(int $id)
     {
+        if (Auth::check()) 
+        {// If the user is authenticated as leader
+            $project = Projects::where(function($query) use ($id) {
+                $query->where('id', $id);
+            })
+            ->where('leader_id', Auth::id()) // Chained 'where' for AND condition
+            ->first();
+
+            if (!empty($project->image) && File::exists(public_path($project->image))) {
+                File::delete(public_path($project->image)); // Delete the image from the server
+            }
         
+            // Delete the project from the database
+            $project->delete();
+
+            return redirect()->route('myprojects')->with('status', 'The project deleted successfully');
+        } 
+
+        $project = Projects::where('id', $id)->first();
+
+        $leader_id = $project->leader_id;
+        $leader = User::where('id', $leader_id)->first();
+
+        $tasks = Task::where('project_id', $id)->get();
+
+        $users = User::all()->pluck('name', 'id');
+
+        $totalCount = Task::where('project_id', $id)->count();
+        $totalCompleteCount = Task::where('project_id', $id)->where('status', 'completed')->count();
+        $completedPercentage = $totalCount > 0 ? ($totalCompleteCount / $totalCount) * 100 : 0;
+        $completedPercentage = round($completedPercentage);
+
+        return redirect()->route('viewProject', $id)->with('status','Only leader can delete the Project');
     }
 
     /*
