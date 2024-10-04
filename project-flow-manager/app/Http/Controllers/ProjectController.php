@@ -354,7 +354,13 @@ class ProjectController extends Controller
                   ->where('project_id', $id);
         })->get();
 
-        return view('addProjectParticipant', ['users'=>$users, 'project_id'=>$id]);
+        $added_users = User::whereIn('id', function($query) use ($id) {
+            $query->select('user_id')
+                  ->from('project_participants')
+                  ->where('project_id', $id);
+        })->get();
+
+        return view('addProjectParticipant', ['users'=>$users, 'project_id'=>$id, 'added_users'=>$added_users]);
     }
 
     public function storeParticipant(int $proj_id, int $user_id)
@@ -381,5 +387,47 @@ class ProjectController extends Controller
             return redirect()->route('addProjectUser', ['id' => $proj_id])
                                 ->with('status', 'Only Project Leader Can Add Participant');
         } 
+    }
+
+    public function removeParticipant(int $proj_id, int $user_id)
+    {
+        $project = Projects::find($proj_id);
+        $leader_id = 0;
+
+        if($project)
+        {
+            $leader_id = $project->leader_id;
+        }
+
+        if(Auth::check() && Auth::id() == $leader_id)
+        {
+            if($leader_id == $user_id)
+            {
+                return redirect()->route('addProjectUser', ['id' => $proj_id]) ->with('status','The Leader can not be removed from Project');
+            }
+            
+            $participant = ProjectParticipant::where('project_id', $proj_id)
+                                 ->where('user_id', $user_id)
+                                 ->first();
+
+            // Get all tasks assigned to the user who is being removed from the project
+            $tasks = Task::where('project_id', $proj_id)
+                    ->where('user_id', $user_id)
+                    ->get(); // Use get() to retrieve all matching tasks
+
+            // Change the user of each task from the current user to the project leader
+            foreach ($tasks as $task) {
+                $task->update(['user_id' => $leader_id]);
+            }
+            $participant->delete();
+
+            return redirect()->route('addProjectUser', ['id' => $proj_id]) ->with('status','The Participant Successfully removed from Project');
+        }
+        else
+        {
+            return redirect()->route('addProjectUser', ['id' => $proj_id])
+                                ->with('status', 'Only Project Leader Can Remove Participant');
+        } 
+
     }
 }

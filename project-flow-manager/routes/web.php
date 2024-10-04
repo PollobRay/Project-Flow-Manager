@@ -57,6 +57,7 @@ Route::get('storeProjectParticipant/{proj_id}/{user_id}',[ProjectController::cla
 Route::get('updateProject/{id}',[ProjectController::class,'updateWindow'])->whereNumber('id')->name('updateProject');
 Route::post('makeUpdateProject/{id}',[ProjectController::class,'makeUpdateProject'])->whereNumber('id')->name('makeUpdateProject');
 Route::get('deleteProject/{id}',[ProjectController::class,'deleteProject'])->whereNumber('id')->name('deleteProject');
+Route::get('removeParticipant/{proj_id}/{user_id}',[ProjectController::class,'removeParticipant'])->whereNumber('proj_id')->whereNumber('user_id')->name('removeParticipant');
 
 Route::get('addTask/{id}',[TaskController::class,'create'])->whereNumber('id')->name('addTask');
 Route::post('storeTask/{id}',[TaskController::class,'store'])->whereNumber('id')->name('storeTask');
@@ -67,3 +68,4 @@ Route::post('addTaskResponse/{proj_id}/{id}',[TaskController::class,'storeTaskRe
 Route::get('updateTaskWindow/{proj_id}/{id}',[TaskController::class,'updateTaskWindow'])->whereNumber('proj_id')->whereNumber('id')->name('updateTaskWindow');
 Route::post('updateTask/{id}',[TaskController::class,'updateTask'])->whereNumber('id')->name('updateTask');
 Route::get('deleteTask/{id}',[TaskController::class,'deleteTask'])->whereNumber('id')->name('deleteTask');
+
