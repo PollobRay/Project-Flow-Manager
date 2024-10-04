@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 use App\Models\Projects;
 use App\Models\ProjectParticipant;
@@ -208,6 +210,43 @@ class ProjectController extends Controller
     }
 
     public function makeUpdateProject(Request $request, int $id)
+    {
+        $project = Projects::where('id', $id)->first();
+
+        $value = $request->validate([
+            'name' => 'required|max:255|string',
+            'description' => 'required',
+            'image' => 'nullable|mimes:png,jpg,jpeg',
+            'privacy' => 'required|in:public,private',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        // To delete previous image from storage
+
+        if ($request->hasFile('image')) {
+            // Check if the current image exists and delete it
+            if (!empty($project->image) && File::exists(public_path($project->image))) {
+                File::delete(public_path($project->image)); // Delete the old image
+            }
+            
+            // Store the new image
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $file_name = time() . '.' . $extension;
+            $path = 'uploads/projects/';
+            $file->move(public_path($path), $file_name);
+            $image = $path . $file_name;
+
+            // Add new image path to validated data
+            $value['image'] = $image;
+        }
+
+        $project->update($value);
+
+        return redirect()->route('viewProject', $id)->with('status', 'The Project updated Successfully');
+    }
+
+    public function deleteProject(int $id)
     {
         
     }

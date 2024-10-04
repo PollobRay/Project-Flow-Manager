@@ -25,7 +25,7 @@ style="background-image: url({{asset('assets/images/bg.png')}}); width: 100%; he
                 @endif
 
                 <div class="mt-4">
-                    <form action="" class="mx-auto" enctype="multipart/form-data" method="POST">
+                    <form action="{{route('makeUpdateProject', ['id' => $project->id])}}" class="mx-auto" enctype="multipart/form-data" method="POST">
                         @csrf
                         <!-- Name input -->
                         <div data-mdb-input-init class="form-outline mb-4">
