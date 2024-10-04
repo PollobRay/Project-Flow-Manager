@@ -239,6 +239,21 @@ class TaskController extends Controller
         return redirect()->route('viewProject', ['id'=>$request->project_id])->with('status','The Task updated Successfully');
     }
 
+    public function deleteTask(int $id)
+    {
+        $task = Task::find($id);
+        $project_id = $task->project_id;
+        $project = Projects::find($project_id);
+        $leader_id = $project->leader_id;
+
+        if(Auth::check() && $leader_id == Auth::id())
+        {
+            $task->delete();
+            return redirect()->route('viewProject', ['id'=>$project_id])->with('status','The Task Updated Successfully');
+        }
+
+        return redirect()->route('viewProject', ['id'=>$project_id])->with('status','Only Project Leader can Delete Task');
+    }
     /*
     //edit category detail detail
     public function edit(int $id)

@@ -66,3 +66,4 @@ Route::get('myTasks',[TaskController::class,'myTasks'])->name('myTasks');
 Route::post('addTaskResponse/{proj_id}/{id}',[TaskController::class,'storeTaskResponse'])->whereNumber('proj_id')->whereNumber('id')->name('addTaskResponse');
 Route::get('updateTaskWindow/{proj_id}/{id}',[TaskController::class,'updateTaskWindow'])->whereNumber('proj_id')->whereNumber('id')->name('updateTaskWindow');
 Route::post('updateTask/{id}',[TaskController::class,'updateTask'])->whereNumber('id')->name('updateTask');
+Route::get('deleteTask/{id}',[TaskController::class,'deleteTask'])->whereNumber('id')->name('deleteTask');
