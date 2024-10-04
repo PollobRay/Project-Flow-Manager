@@ -28,7 +28,7 @@
         </div>
         <div class="d-flex flex-column">
             <a href="{{route('markAsComplete', ['proj_id'=> $proj_id, 'id'=>$task->id])}}" type="button" class="btn btn-outline-primary text-uppercase fw-bold mb-2">Mark As Complete</a>
-            <a type="button" class="btn btn-outline-success text-uppercase fw-bold mb-2">Update</a>
+            <a type="button" href="{{route('updateTaskWindow', ['proj_id'=> $proj_id, 'id'=>$task->id])}}" class="btn btn-outline-success text-uppercase fw-bold mb-2">Update</a>
             <a type="button" class="btn btn-outline-danger text-uppercase fw-bold">Delete</a>
             <h2 class="text-uppercase fw-bold text-primary mt-2">{{$task->status}}</h2>
             <div class="p-2"><h4 class="fw-bold">Deadline: <span>{{$task->due_date}}</span></h4></div>

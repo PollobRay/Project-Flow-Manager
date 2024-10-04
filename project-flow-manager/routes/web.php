@@ -64,4 +64,5 @@ Route::get('viewTask/{proj_id}/{id}',[TaskController::class,'show'])->whereNumbe
 Route::get('markAsComplete/{proj_id}/{id}',[TaskController::class,'markAsComplete'])->whereNumber('proj_id')->whereNumber('id')->name('markAsComplete');
 Route::get('myTasks',[TaskController::class,'myTasks'])->name('myTasks');
 Route::post('addTaskResponse/{proj_id}/{id}',[TaskController::class,'storeTaskResponse'])->whereNumber('proj_id')->whereNumber('id')->name('addTaskResponse');
-
+Route::get('updateTaskWindow/{proj_id}/{id}',[TaskController::class,'updateTaskWindow'])->whereNumber('proj_id')->whereNumber('id')->name('updateTaskWindow');
+Route::post('updateTask/{id}',[TaskController::class,'updateTask'])->whereNumber('id')->name('updateTask');

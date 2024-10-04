@@ -128,11 +128,11 @@ class TaskController extends Controller
                 'due_date' => $request->due_date,
             ]);
     
-            return redirect()->route('addTask', ['id'=>$id])->with('status','The Task is created Successfully ');
+            return redirect()->route('viewProject', ['id'=>$id])->with('status','The Task is created Successfully ');
         }
         else
         {
-            return redirect()->route('addTask', ['id'=>$id])->with('status','Only Project Leader can Create Task');
+            return redirect()->route('viewProject', ['id'=>$id])->with('status','Only Project Leader can Create Task');
         }
     }
 
@@ -164,7 +164,7 @@ class TaskController extends Controller
         {   
             if($task->status == 'completed') // If already mark completed
             {
-                return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $proj_id])->with('status', 'The Task is already marked as Completed');
+                return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $id])->with('status', 'The Task is already marked as Completed');
             }
 
             //Finding Task Responses
@@ -185,9 +185,58 @@ class TaskController extends Controller
                     'message' => $request->message,
                  ]);
             }
-            return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $proj_id])->with('status', 'Task Response Provided Successfully');
+            return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $id])->with('status', 'Task Response Provided Successfully');
         }
-        return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $proj_id])->with('status', 'Only Assigned User can Provide Task Response');
+        return redirect()->route('viewTask',['proj_id' => $proj_id, 'id' => $id])->with('status', 'Only Assigned User can Provide Task Response');
+    }
+
+
+    public function updateTaskWindow(int $proj_id, int $id)
+    {
+        $task = Task::find($id);
+        $selectedPrivacy = $task->privacy;
+        $selectedUserId = $task->user_id;
+        $taskStatus = $task-> status ;
+        $isUserDisabled = false;
+
+        $project = Projects::find($proj_id);  // Find the project by its ID
+        $leader_id = $project->leader_id;
+
+        if(!(Auth::check() && Auth::id() == $leader_id))
+        {
+            return redirect()->route('viewProject', ['id'=>$proj_id])->with('status','Only Project Leader can Update Task');
+        }
+
+        if($taskStatus == 'completed')
+        {
+            $isUserDisabled = true;
+        }
+
+        $users = User::whereIn('id', function($query) use ($proj_id) {
+            $query->select('user_id')
+                  ->from('project_participants')
+                  ->where('project_id', $proj_id);
+        })->get();
+
+        return view('updateTaskWindow',['task'=>$task, 'users'=>$users, 'selectedPrivacy'=>$selectedPrivacy, 'selectedUserId'=>$selectedUserId, 'isUserDisabled'=>$isUserDisabled, 'proj_id'=>$proj_id]);
+    }
+
+    public function updateTask(Request $request, int $id)
+    {
+        $value = $request->validate([
+            'name' => 'required|max:255|string',
+            'description' => 'required',
+            'privacy' => 'required|in:public,private',
+            'due_date' => 'required',
+            'project_id' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        $task = Task::find($id);
+
+        $task->update($value);
+
+        return redirect()->route('viewProject', ['id'=>$request->project_id])->with('status','The Task updated Successfully');
     }
 
     /*
