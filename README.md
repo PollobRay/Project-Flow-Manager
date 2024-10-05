@@ -17,3 +17,15 @@ Tasks within a project can also be categorized as public or private:
 
 Task-assigned users can interact with the task by providing updates, such as marking it as complete or sending a response message to the Project Leader. 
 The Project Leader maintains full control over the project and its tasks, with the ability to update or delete them as needed.
+
+# MVC (Model View Controller) Structure
+## Models:
+![model1](https://github.com/user-attachments/assets/c70dfe18-dcbc-487d-b9c0-b98c25b72483)
+![model2](https://github.com/user-attachments/assets/ac905405-0e5e-4d4c-9ccb-7f1447f64d69)
+
+
+## Controllers:
+![controller1](https://github.com/user-attachments/assets/6c69711a-2845-4629-b156-18593a3f4e3e)
+![controller2](https://github.com/user-attachments/assets/c6008733-090b-4b10-be0f-bfb3d3a88e13)
+
+
