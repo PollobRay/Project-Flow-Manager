@@ -27,7 +27,7 @@
     </div>  
     <div class="d-flex flex-row justify-content-between mt-5 ">
         <div class="d-flex">
-            <div class="p-2"><img src="@if(Auth::user()->image){{asset(Auth::user()->image)}}@else{{asset('assets/images/bg.png')}} @endif" alt="Leader Photo" class="img-thumbnail" style="height: 10em; width:10em"></div>
+            <div class="p-2"><img src="@if($leader->image){{asset($leader->image)}}@else{{asset('assets/images/bg.png')}} @endif" alt="Leader Photo" class="img-thumbnail" style="height: 10em; width:10em"></div>
             <div class="">
                 <div class="p-2 text-uppercase"><h4 class="fw-bold text-danger">Project Leader : </h4></div>
                 <div class="p-2"><h3 class="fw-bold text-success">{{$leader->name}}</h3></div>

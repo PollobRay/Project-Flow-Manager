@@ -47,7 +47,7 @@ style="background-image: url({{asset('assets/images/bg1.png')}}); width: 100%; h
           <div class="card" style="border-radius: 15px; background-color: rgba(233, 231, 231, 0.863);">
             <div class="card-body p-5" >
               <div class="d-flex flex-column justify-content-center align-items-center">
-                <h2 class="text-uppercase fw-bold text-center mb-2">Browse Projects</h2> 
+                <h2 class="text-uppercase fw-bold text-center mb-2">Browse All Projects</h2> 
                 <a class="btn btn-outline-success btn-lg fw-bold align-items-center text-uppercase mt-4" href="{{route('allprojects')}}">Projects &#8594;</a>
             </div>
             </div>

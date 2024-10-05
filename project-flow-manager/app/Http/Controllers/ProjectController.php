@@ -82,12 +82,30 @@ class ProjectController extends Controller
 
         if (Auth::check()) 
         {// If the user is authenticated
+
+            $participantProjectId = ProjectParticipant::where('user_id', Auth::id())
+                                    ->where('project_id', $id)
+                                    ->pluck('project_id')
+                                    ->first();
+
+            $project = Projects::where(function($query) use ($id) {
+                                        $query->where('id', $id)
+                                            ->where('privacy', 'public');
+                                    })
+                                    ->orWhere(function($query) use ($participantProjectId) {
+                                        if ($participantProjectId) {
+                                            $query->where('id', $participantProjectId);
+                                        }
+                                    })
+                                    ->first();
+
+            /*
             $project = Projects::where(function($query) use ($id) {
                 $query->where('id', $id)
                     ->where('privacy', 'public');
             })
             ->orWhereIn('id', ProjectParticipant::where('user_id', Auth::id())->pluck('project_id')->toArray())
-            ->first();
+            ->first(); */
         } 
         else 
         { // If the user is not authenticated, only public projects are available
@@ -261,9 +279,11 @@ class ProjectController extends Controller
             }
         
             // Delete the project from the database
-            $project->delete();
-
-            return redirect()->route('myprojects')->with('status', 'The project deleted successfully');
+            if($project)
+            {
+                $project->delete();
+                return redirect()->route('myprojects')->with('status', 'The project deleted successfully');
+            }  
         } 
 
         $project = Projects::where('id', $id)->first();

@@ -57,7 +57,7 @@ class CategoryController extends Controller
             'image' => $path.$file_name
         ]);
 
-        return redirect()->route('addCategory')->with('status','The Category Added Successfully');
+        return redirect()->route('category')->with('status','The Category Added Successfully');
     }
 
     /*

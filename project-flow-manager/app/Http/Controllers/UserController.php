@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
+    public function signupWindow()
+    {
+        return view('signup');
+    }
+
     public function register(Request $request)
     {
         if(Auth::check())
@@ -44,6 +49,11 @@ class UserController extends Controller
         {
             return redirect()->route('login');
         }
+    }
+
+    public function loginWindow()
+    {
+        return view('login');
     }
 
     public function login(Request $request)

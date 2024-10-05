@@ -136,7 +136,7 @@ class TaskController extends Controller
         }
     }
 
-    public function myTasks(int $proj_id, int $id)
+    public function myTasks()
     {
         if(Auth::guest())
         {
